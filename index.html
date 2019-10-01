@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Island Survival </title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <script src="main.js" charset="utf-8" type="text/javascript"></script>
+  <body>
+    <div class="Row">
+      <div class="Counts">
+        <p id="cocoCollected" class="coco-collected">0 Coconuts</p>
+        <br>
+        <p id="stoneCollected" class="stone-collected">0 Stone</p>
+      </div>
+      <div class="All-Buttons">
+        <div id="coconutUpgrades">
+          <div class="Row">
+            <div class="tooltip">
+              <button onClick="collectCoconut()" class="collect-coconut" id="collectCoconut" align="left">Collect Cocount</button>
+              <span class="tooltiptext" id="collectCoconutTip">(+1 coconut/click)<br> ----- <br> Gather a coconut from the sand</span>
+            </div>
+            <div class="tooltip">
+              <button onClick="collectStone()" class="collect-stone" id="collectStone">Collect Stone</button>
+              <span class="tooltiptext">(+0.5 stone) <br> ----- <br> Pick up a rock off the beach</span>
+            </div>
+          </div>
+          <div class="Row">
+            <div class="tooltip">
+              <button onClick="buyCoconutPerClick()" class="basket" id="perClickUpgrade">Basket (Level 1)</button>
+              <span class="tooltiptext basket" id="buyBasketTip">(+1 coconut/click)<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: 10 coconuts</span>
+            </div>
+            <!--
+<div class="tooltip">
+              <button onClick="buyCoconutPerClick()" id="perClickUpgrade">test</button>
+            </div>
+-->
+          </div>
+        </div>
+      <div id="researchUpgrades">
+        <p>test</p>
+      </div>
+    </div>
+    <div class="Event-Log" id="event-log">
+      <button onClick="saveGame()" id="saveGame">Save</button>  <button onClick="loadGame()" id="loadGame">Load</button>
+      <p>Event Log</p>
+      <p id="log"> You wake up, washed ashore on an island with no memory of how you got here.  You're hungry and the beach is scattered with coconuts. </p>
+    </div>
+  </div>
+  </body>
+</html>

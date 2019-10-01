@@ -1,0 +1,128 @@
+
+
+/* The main body CSS for page color and text color */
+body {
+  color: white;
+  background-color: #000f21;
+}
+.Row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 10px;
+}
+
+.tooltip {
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  vertical-align: top;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 125px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  background-color: #000308;
+  color:white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: inherit;
+}
+
+button:disabled,
+button[disabled] + .tooltip {
+  display: none !important;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.Counts {
+  width: 135px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: top;
+}
+
+.All-Buttons {
+  display: table-cell;
+  text-align: left;
+  vertical-align: top;
+}
+
+.Event-Log {
+  display: table-cell;
+  text-align: center;
+  vertical-align: top;
+}
+
+/* Handles the CSS for all buttons in the game */
+button {
+  border-color: white;
+  width: 175px;
+  background-color: inherit;
+  color:inherit;
+  font-size: 13px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px #999;
+  outline: none;
+}
+
+/* Collect Coconuts button turns a coconut brown when clicked */
+.collect-coconut:hover {background-color: #965a3e;}
+.collect-coconut:active {
+  background-color: #965a3e;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* Collect Stone */
+.collect-stone:hover {background-color: #3c3c3c}
+.collect-coconut:active {
+  background-color: #3c3c3c;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.basket {
+  display: none;
+  opacity: 0.6;
+}
+.basket:hover {background-color: #605628}
+.basket:active {
+  background-color: #605628;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+
+
+
+br {
+   display: block;
+   margin: 1px 0;
+}
+{
+  outline: none;
+}
