@@ -6,24 +6,25 @@ var gameData = {
   coconuts: 0,
   stone: 0,
   milk: 0,
-
-  timeHour: new Date().getMinutes(),
-  timePrevHour: 0,
-  timeMinute: new Date().getMinutes(),
-  timeSeconds: new Date().getSeconds(),
-
-  temperature: 0,
-  //hunger and thirst scale of 0-100
-  hunger: 50,
-  thirst: 50,
+  monkeys: 0,
 
   coconutPerClick: 1,
   stonePerClick: .5,
   milkPerCrack: 0.75,
+  monkeyAddRate: 1,
+
+  coconutPerS: 0,
+
+  b1: true,
+  b2: false,
+  b3: false,
+  b4: false,
+  b5: false,
 
   cocoPerClickCost: 10,
   crackOpenCocoCost: 50,
-  crackOpenStoneCost: 5
+  crackOpenStoneCost: 5,
+  monkeyCost:6,
 }
 
 window.onload = function() {
@@ -32,73 +33,67 @@ window.onload = function() {
   hide("perClickUpgrade")
   hide("crackOpenCoco")
   hide("crackOpenTip")
+  hide("befriendMonkey")
   tab("coconutUpgrades")
 }
 
 var checkToShow = window.setInterval(function() {
-  var d = new Date()
-  gameData.timeHour = d.getHours()
-  gameData.timeMinute = d.getMinutes()
-  gameData.timeSeconds = d.getSeconds()
-  document.getElementById("timeHour").innerHTML = gameData.timeHour;
-  document.getElementById("timeMinute").innerHTML = gameData.timeMinute;
-  document.getElementById("timeSeconds").innerHTML = gameData.timeSeconds;
-  document.getElementById("temperature").innerHTML = gameData.temperature;
-
   if (gameData.coconuts >= 1) {
     document.getElementById("cocoCollected").style.display = "inline-block"
   }
   if (gameData.stone > 0) {
     document.getElementById("stoneCollected").style.display = "inline-block"
   }
+  if (gameData.coconuts >=5) {
+    display("perClickUpgrade")
+    display("buyBasketTip")
+    gameData.b2 = true
+  }
   if (gameData.coconuts >= 75) {
     display("collectStone")
+    display("stoneTip")
+    gameData.b3 = true
+    console.log('we set b3 to true')
   }
-
-
-  if (gameData.coconuts >=5) {
-    document.getElementById("perClickUpgrade").style.display = "inline-block"
-    document.getElementById("buyBasketTip").style.display = "inline-block"
+  if (gameData.stone >= 9.9) {
+    display("crackOpenCoco")
+    display("crackOpenTip")
+    gameData.b4 = true
   }
-  if (gameData.coconuts < gameData.cocoPerClickCost) {
-    document.getElementById("perClickUpgrade").style.opacity = 0.6
-    document.getElementById("buyBasketTip").style.opacity = 0.6
+  if (gameData.milk >= 3.74) {
+    display("befriendMonkey")
+    display("monkyTip")
+    gameData.b5 = true
   }
-
-
   if (gameData.coconuts >= gameData.cocoPerClickCost) {
-    document.getElementById("perClickUpgrade").style.opacity = 1
-    document.getElementById("buyBasketTip").style.opacity = 1
+    enable("perClickUpgrade")
   }
-
-  if (gameData.timePrevHour != gameData.timeHour){
-    if(gameData.timeHour <=4 || gameData.timeHour >= 18)
-    {
-      gameData.temperature = randomNumInRange(30, 75)
-    }
-    else{
-      gameData.temperature = randomNumInRange(75, 105)
-    }
+  else {
+    disable("perClickUpgrade")
   }
-
-  //if too cold log a message and suggest a course of action
-  if (gameData.temperature <= 50){
-    update("log", "It's getting cold tonight, perhaps I should find a way to get warm")
+  if (gameData.coconuts >= gameData.crackOpenCocoCost && gameData.stone >= gameData.crackOpenStoneCost) {
+    enable("crackOpenCoco")
+    disable("crackOpenTip")
   }
-
-  gameData.timePrevHour = gameData.timeHour
-
+  else {
+    disable("crackOpenCoco")
+    disable("crackOpenTip")
+  }
+  if (gameData.milk >= gameData.monkeyCost) {
+    enable("befriendMonkey")
+    enable("monkyTip")
+  }
+  else {
+    disable("befriendMonkey")
+    disable("monkyTip")
+  }
 }, 500)
 
 var automationLoop = window.setInterval(function() {
-  console.log("gar gar cum jar")
+  gameData.coconuts += gameData.coconutPerS
 
 }, 1000)
 
-function collectStone() {
-  gameData.stone += gameData.stonePerClick
-  document.getElementById("stoneCollected").innerHTML = gameData.stone + " Stone"
-}
 
 function collectCoconut() {
   if (gameData.isFirstCoco == true) {
@@ -108,28 +103,6 @@ function collectCoconut() {
   }
   gameData.coconuts += gameData.coconutPerClick
   document.getElementById("cocoCollected").innerHTML = gameData.coconuts + " Coconuts"
-}
-
-function crackOpenCoconut() {
-  if (gameData.coconuts >= gameData.crackOpenCocoCost && gameData.stone >= crackOpenStoneCost) {
-    if (isFirstCrack == true) {update("log", "The stones are dull, and most of the milk quickly seeped into the sand, but you managed to store some.  I wonder what this will attract.")}
-    gameData.coconuts -= gameData.crackOpenCocoCost
-    gameData.milk += gameData.milkPerCrack
-    update("milkCollected", gameData.milk + " Coconut Milk")
-  }
-}
-
-function randomNumInRange(min, max){
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min)) + min
-
-}
-
-function tab(tab) {
-  document.getElementById("coconutUpgrades").style.display = "none"
-  document.getElementById("researchUpgrades").style.display = "none"
-  document.getElementById(tab).style.display = "inline-block"
 }
 
 function buyCoconutPerClick() {
@@ -142,6 +115,45 @@ function buyCoconutPerClick() {
     document.getElementById("collectCoconutTip").innerHTML = "(+" +gameData.coconutPerClick + " coconut/click)<br> ----- <br> Gather a coconut from the sand"
     document.getElementById("buyBasketTip").innerHTML = "+1 coconut/click<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: " + gameData.cocoPerClickCost + " coconuts"
   }
+}
+
+function collectStone() {
+  gameData.stone += gameData.stonePerClick
+  document.getElementById("stoneCollected").innerHTML = gameData.stone + " Stone"
+}
+
+function crackOpenCoconut() {
+  if (gameData.coconuts >= gameData.crackOpenCocoCost && gameData.stone >= gameData.crackOpenStoneCost) {
+    if (gameData.isFirstCrack == true) {
+      update("log", "The stones are dull, and most of the milk quickly seeped into the sand, but you managed to store some.  You wonder what this will attract. <br><br>" + document.getElementById("log").innerHTML)
+      gameData.isFirstCrack = false
+      updateGameLog()
+    }
+    gameData.coconuts -= gameData.crackOpenCocoCost
+    gameData.stone -= gameData.crackOpenStoneCost
+    gameData.milk += gameData.milkPerCrack
+    update("milkCollected", gameData.milk + " Coconut Milk")
+    update("cocoCollected", gameData.coconuts + " Coconuts")
+    update("stoneCollected", gameData.stone + " Stone")
+  }
+}
+
+function befriendMonkey() {
+  if (gameData.milk > gameData.monkeyCost) {
+    console.log('monky time')
+    gameData.monkeys += 1
+    gameData.coconutPerS += gameData.monkeyAddRate
+    gameData.milk -= gameData.monkeyCost
+    gameData.monkeyCost *= gameData.monkey + 10(ln(gameData.monkeyCost))
+    update("monkeys", gameData.monkeys + " monkeys")
+    update("milkCollected", gameData.milk + " Coconut Milk")
+  }
+}
+
+function tab(tab) {
+  document.getElementById("coconutUpgrades").style.display = "none"
+  document.getElementById("researchUpgrades").style.display = "none"
+  document.getElementById(tab).style.display = "inline-block"
 }
 
 function update(id, content) {
@@ -161,7 +173,11 @@ function disable(id) {
 }
 
 function enable(id) {
-  document.getElementById("buyBasketTip").style.opacity = 1
+  document.getElementById(id).style.opacity = 1
+}
+
+function updateGameLog() {
+  gameData.log = document.getElementById("log").innerHTML
 }
 
 function format(number, type) {
@@ -173,20 +189,30 @@ function format(number, type) {
 }
 
 /* YOU CANNOT FORGET TO PUT NEW VARIABLES HERE TO MAKE SURE THE LOAD FEATURE WORKS*/
-function updateAllVariables() {
+function updateAllVariables(savegame) {
   update("stoneCollected", gameData.stone + " Stone")
   update("cocoCollected", gameData.coconuts + " Coconuts")
+  update("milkCollected", gameData.milk + " Coconut Milk")
+  if (savegame.b2) {
+    console.log("please display baskets")
+    display("perClickUpgrade")
+  }
+  if (savegame.b3) {
+    console.log("please display stone collection")
+    display("collectStone")
+  }
+  if (gameData.b4) {
+    display("crackOpenCoco")
+  }
+
   update("perClickUpgrade", "Basket (Level " + gameData.coconutPerClick + ")")
+
   update("collectCoconutTip", "Gather a coconut from the sand")
   update("buyBasketTip", "+1 coconut/click<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: " + gameData.cocoPerClickCost + " coconuts")
+  display("crackOpenTip")
+  display("stoneTip")
+
   update("log", gameData.log)
-  update("timeHour", gameData.timeHour)
-  update("timeMinute", gameData.timeMinute)
-  update("timeSeconds", gameData.timeSeconds)
-  update("timePrevHour", gameData.timePrevHour)
-  update("temperature", gameData.timePrevHour)
-  update("hunger", gameData.hunger)
-  update("thirst", gameData.thirst)
 }
 
 /*
@@ -203,6 +229,6 @@ function loadGame() {
   var savegame = JSON.parse(localStorage.getItem("islandSave"))
   if (savegame !== null) {
     gameData = savegame
-    updateAllVariables()
+    updateAllVariables(savegame)
   }
 }

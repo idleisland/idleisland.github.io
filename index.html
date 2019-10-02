@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title> Island Survival </title>
+    <title> Idle Island </title>
     <link rel="stylesheet" href="style.css">
   </head>
   <script src="main.js" charset="utf-8" type="text/javascript"></script>
@@ -14,12 +14,14 @@
         <p id="stoneCollected" class="stone-collected"></p>
         <br>
         <p id="milkCollected" class="milk-collected"></p>
+        <br>
+        <p id="monkeys" class="monkey-friends"></p>
       </div>
       <div class="All-Buttons">
         <div id="coconutUpgrades">
           <div class="Row">
             <div class="tooltip">
-              <button onClick="collectCoconut()" class="collect-coconut" id="collectCoconut" align="left">Collect Cocount &nbsp; &nbsp; <img src="coco.png" width="30" height="30"/></button>
+              <button onClick="collectCoconut()" class="collect-coconut" id="collectCoconut" align="left">Collect Cocount</button>
               <span class="tooltiptext" id="collectCoconutTip">
                 +1 coconut<br> ----- <br> Gather a coconut from the sand
               </span>
@@ -41,7 +43,16 @@
             <div class="tooltip">
               <button onClick="crackOpenCoconut()" class="crack-open-coco" id="crackOpenCoco">Crack Open Coconut</button>
               <span class="tooltiptext" id="crackOpenTip">
-                (+0.75 coconut milk) <br> ----- <br> Crack open coconuts for their milk
+                (+0.75 coconut milk) <br> ----- <br> Crack open coconuts for their milk <br> ----- <br> Cost: 50 coconuts
+                 5 stone
+              </span>
+            </div>
+          </div>
+          <div class="Row">
+            <div class="tooltip">
+              <button onClick="befriendMonkey()" class="befriend-monkey" id="befriendMonkey">Befriend Monkey</button>
+              <span class="tooltiptext" id="monkyTip">
+                (+1 coconut/s) <br> ----- <br> They seem to like the milk! Make a friend. <br> ----- <br> Cost: 6 coconut milk
               </span>
             </div>
           </div>
@@ -53,9 +64,6 @@
     <div class="Event-Log" id="event-log">
       <button onClick="saveGame()" id="saveGame">Save</button>  <button onClick="loadGame()" id="loadGame">Load</button>
       <p>Event Log</p>
-      <b>Current Time: </b><b id="timeHour"></b><b>:</b><b id="timeMinute"></b><b>:</b><b id="timeSeconds"></b>
-      <br>
-      <b>Current Temperature: </b> <b id="temperature" ></b><b>&deg;F</b>
       <p id="log"> You wake up, washed ashore on an island with no memory of how you got here.  You're hungry and the beach is scattered with coconuts. </p>
     </div>
   </div>

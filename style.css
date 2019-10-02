@@ -114,7 +114,13 @@ button {
   transform: translateY(4px);
 }
 
-
+/* Crack open coconut */
+.crack-open-coco:hover {background-color:#F0EDE5}
+.crack-open-coco:active {
+  background-color: #F0EDE5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
 
 
