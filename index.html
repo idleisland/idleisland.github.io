@@ -9,32 +9,41 @@
   <body>
     <div class="Row">
       <div class="Counts">
-        <p id="cocoCollected" class="coco-collected">0 Coconuts</p>
+        <p id="cocoCollected" class="coco-collected"></p>
         <br>
-        <p id="stoneCollected" class="stone-collected">0 Stone</p>
+        <p id="stoneCollected" class="stone-collected"></p>
+        <br>
+        <p id="milkCollected" class="milk-collected"></p>
       </div>
       <div class="All-Buttons">
         <div id="coconutUpgrades">
           <div class="Row">
             <div class="tooltip">
               <button onClick="collectCoconut()" class="collect-coconut" id="collectCoconut" align="left">Collect Cocount</button>
-              <span class="tooltiptext" id="collectCoconutTip">(+1 coconut/click)<br> ----- <br> Gather a coconut from the sand</span>
+              <span class="tooltiptext" id="collectCoconutTip">
+                +1 coconut<br> ----- <br> Gather a coconut from the sand
+              </span>
             </div>
             <div class="tooltip">
-              <button onClick="collectStone()" class="collect-stone" id="collectStone">Collect Stone</button>
-              <span class="tooltiptext">(+0.5 stone) <br> ----- <br> Pick up a rock off the beach</span>
+              <button onClick="buyCoconutPerClick()" class="basket" id="perClickUpgrade">Basket (Level 1)</button>
+              <span class="tooltiptext basket" id="buyBasketTip">
+                (+1 coconut/click)<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: 10 coconuts
+              </span>
             </div>
           </div>
           <div class="Row">
             <div class="tooltip">
-              <button onClick="buyCoconutPerClick()" class="basket" id="perClickUpgrade">Basket (Level 1)</button>
-              <span class="tooltiptext basket" id="buyBasketTip">(+1 coconut/click)<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: 10 coconuts</span>
+              <button onClick="collectStone()" class="collect-stone" id="collectStone">Collect Stone</button>
+              <span class="tooltiptext" id="stoneTip">
+                (+0.5 stone) <br> ----- <br> Pick up a rock off the beach
+              </span>
             </div>
-            <!--
-<div class="tooltip">
-              <button onClick="buyCoconutPerClick()" id="perClickUpgrade">test</button>
+            <div class="tooltip">
+              <button onClick="crackOpenCoconut()" class="crack-open-coco" id="crackOpenCoco">Crack Open Coconut</button>
+              <span class="tooltiptext" id="crackOpenTip">
+                (+0.75 coconut milk) <br> ----- <br> Crack open coconuts for their milk
+              </span>
             </div>
--->
           </div>
         </div>
       <div id="researchUpgrades">

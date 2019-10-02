@@ -103,7 +103,7 @@ button {
   transform: translateY(4px);
 }
 
-.basket {
+.basket{
   display: none;
   opacity: 0.6;
 }
