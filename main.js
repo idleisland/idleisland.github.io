@@ -7,6 +7,10 @@ var gameData = {
   stone: 0,
   milk: 0,
 
+  timeHour: new Date().getMinutes(),
+  timeMinute: new Date().getMinutes(),
+  timeSeconds: new Date().getSeconds(),
+
   coconutPerClick: 1,
   stonePerClick: .5,
   milkPerCrack: 0.75,
@@ -26,6 +30,14 @@ window.onload = function() {
 }
 
 var checkToShow = window.setInterval(function() {
+  var d = new Date()
+  gameData.timeHour = d.getHours()
+  gameData.timeMinute = d.getMinutes()
+  gameData.timeSeconds = d.getSeconds()
+  document.getElementById("timeHour").innerHTML = gameData.timeHour;
+  document.getElementById("timeMinute").innerHTML = gameData.timeMinute;
+  document.getElementById("timeSeconds").innerHTML = gameData.timeSeconds;
+
   if (gameData.coconuts >= 1) {
     document.getElementById("cocoCollected").style.display = "inline-block"
   }
@@ -35,6 +47,7 @@ var checkToShow = window.setInterval(function() {
   if (gameData.coconuts >= 75) {
     display("collectStone")
   }
+
 
   if (gameData.coconuts >=5) {
     document.getElementById("perClickUpgrade").style.display = "inline-block"
@@ -50,6 +63,7 @@ var checkToShow = window.setInterval(function() {
     document.getElementById("perClickUpgrade").style.opacity = 1
     document.getElementById("buyBasketTip").style.opacity = 1
   }
+
 }, 500)
 
 var automationLoop = window.setInterval(function() {
@@ -136,6 +150,7 @@ function updateAllVariables() {
   update("collectCoconutTip", "Gather a coconut from the sand")
   update("buyBasketTip", "+1 coconut/click<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: " + gameData.cocoPerClickCost + " coconuts")
   update("log", gameData.log)
+  update("time", gameData.time)
 }
 
 /*
