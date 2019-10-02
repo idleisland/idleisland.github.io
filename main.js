@@ -13,6 +13,9 @@ var gameData = {
   timeSeconds: new Date().getSeconds(),
 
   temperature: 0,
+  //hunger and thirst scale of 0-100
+  hunger: 50,
+  thirst: 50,
 
   coconutPerClick: 1,
   stonePerClick: .5,
@@ -69,7 +72,18 @@ var checkToShow = window.setInterval(function() {
   }
 
   if (gameData.timePrevHour != gameData.timeHour){
-    gameData.temperature = randomNumInRange(75, 105)
+    if(gameData.timeHour <=4 || gameData.timeHour >= 18)
+    {
+      gameData.temperature = randomNumInRange(30, 75)
+    }
+    else{
+      gameData.temperature = randomNumInRange(75, 105)
+    }
+  }
+
+  //if too cold log a message and suggest a course of action
+  if (gameData.temperature <= 50){
+    update("log", "It's getting cold tonight, perhaps I should find a way to get warm")
   }
 
   gameData.timePrevHour = gameData.timeHour
@@ -166,7 +180,13 @@ function updateAllVariables() {
   update("collectCoconutTip", "Gather a coconut from the sand")
   update("buyBasketTip", "+1 coconut/click<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: " + gameData.cocoPerClickCost + " coconuts")
   update("log", gameData.log)
-  update("time", gameData.time)
+  update("timeHour", gameData.timeHour)
+  update("timeMinute", gameData.timeMinute)
+  update("timeSeconds", gameData.timeSeconds)
+  update("timePrevHour", gameData.timePrevHour)
+  update("temperature", gameData.timePrevHour)
+  update("hunger", gameData.hunger)
+  update("thirst", gameData.thirst)
 }
 
 /*
