@@ -8,8 +8,11 @@ var gameData = {
   milk: 0,
 
   timeHour: new Date().getMinutes(),
+  timePrevHour: 0,
   timeMinute: new Date().getMinutes(),
   timeSeconds: new Date().getSeconds(),
+
+  temperature: 0,
 
   coconutPerClick: 1,
   stonePerClick: .5,
@@ -37,6 +40,7 @@ var checkToShow = window.setInterval(function() {
   document.getElementById("timeHour").innerHTML = gameData.timeHour;
   document.getElementById("timeMinute").innerHTML = gameData.timeMinute;
   document.getElementById("timeSeconds").innerHTML = gameData.timeSeconds;
+  document.getElementById("temperature").innerHTML = gameData.temperature;
 
   if (gameData.coconuts >= 1) {
     document.getElementById("cocoCollected").style.display = "inline-block"
@@ -63,6 +67,12 @@ var checkToShow = window.setInterval(function() {
     document.getElementById("perClickUpgrade").style.opacity = 1
     document.getElementById("buyBasketTip").style.opacity = 1
   }
+
+  if (gameData.timePrevHour != gameData.timeHour){
+    gameData.temperature = randomNumInRange(75, 105)
+  }
+
+  gameData.timePrevHour = gameData.timeHour
 
 }, 500)
 
@@ -95,6 +105,12 @@ function crackOpenCoconut() {
   }
 }
 
+function randomNumInRange(min, max){
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min
+
+}
 
 function tab(tab) {
   document.getElementById("coconutUpgrades").style.display = "none"
