@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <script src="main.js" charset="utf-8" type="text/javascript"></script>
+  <script src="buttonActions.js" charset="utf-8" type="text/javascript"></script>
   <body>
     <div class="Row">
       <div class="Counts">
@@ -16,6 +17,7 @@
         <p id="milkCollected" class="milk-collected"></p>
         <br>
         <p id="monkeys" class="monkey-friends"></p>
+        <br>
       </div>
       <div class="All-Buttons">
         <div id="coconutUpgrades">
@@ -32,14 +34,14 @@
                 (+1 coconut/click)<br> ----- <br> Weave a basket out of coconut husks<br> ----- <br> Cost: 10 coconuts
               </span>
             </div>
-          </div>
-          <div class="Row">
             <div class="tooltip">
               <button onClick="collectStone()" class="collect-stone" id="collectStone">Collect Stone</button>
               <span class="tooltiptext" id="stoneTip">
                 (+0.5 stone) <br> ----- <br> Pick up a rock off the beach
               </span>
             </div>
+          </div>
+          <div class="Row">
             <div class="tooltip">
               <button onClick="crackOpenCoconut()" class="crack-open-coco" id="crackOpenCoco">Crack Open Coconut</button>
               <span class="tooltiptext" id="crackOpenTip">
@@ -47,14 +49,14 @@
                  5 stone
               </span>
             </div>
-          </div>
-          <div class="Row">
             <div class="tooltip">
               <button onClick="befriendMonkey()" class="befriend-monkey" id="befriendMonkey">Befriend Monkey</button>
               <span class="tooltiptext" id="monkyTip">
-                (+1 coconut/s) <br> ----- <br> They seem to like the milk! Make a friend. <br> ----- <br> Cost: 6 coconut milk
+                (+2.5 coconut/s) <br> ----- <br> They seem to like the milk! Make a friend. <br> ----- <br> Cost: 6 coconut milk
               </span>
             </div>
+          </div>
+          <div class="Row">
           </div>
         </div>
       <div id="researchUpgrades">

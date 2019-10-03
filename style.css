@@ -60,6 +60,7 @@ button[disabled] + .tooltip {
   display: table-cell;
   text-align: center;
   vertical-align: top;
+  line-height: 1px;
 }
 
 .All-Buttons {
@@ -118,6 +119,14 @@ button {
 .crack-open-coco:hover {background-color:#F0EDE5}
 .crack-open-coco:active {
   background-color: #F0EDE5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* Monky */
+.befriend-monkey:hover {background-color: #9f6934}
+.befriend-monkey:active {
+  background-color: #9f6934;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
