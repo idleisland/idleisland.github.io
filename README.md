@@ -1,2 +1,2 @@
 # untitled_incriment_game
-welcome to the game
+An Idle Island Survival game.
