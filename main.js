@@ -13,6 +13,13 @@ var gameData = {
   milkPerCrack: 0.75,
   monkeyAddRate: 1.75,
 
+  timeHour: new Date().getMinutes(),
+  timePrevHour: 0,
+  timeMinute: new Date().getMinutes(),
+  timeSeconds: new Date().getSeconds(),
+
+  temperature: 0,
+
   coconutPerS: 0,
 
   b1: true,
@@ -39,6 +46,14 @@ window.onload = function() {
 }
 
 var checkToShow = window.setInterval(function() {
+  var d = new Date()
+  gameData.timeHour = d.getHours()
+  gameData.timeMinute = d.getMinutes()
+  gameData.timeSeconds = d.getSeconds()
+  document.getElementById("timeHour").innerHTML = gameData.timeHour;
+  document.getElementById("timeMinute").innerHTML = gameData.timeMinute;
+  document.getElementById("timeSeconds").innerHTML = gameData.timeSeconds;
+  document.getElementById("temperature").innerHTML = gameData.temperature;
   if (gameData.coconuts >= 1) {
     document.getElementById("cocoCollected").style.display = "inline-block"
   }
@@ -50,6 +65,22 @@ var checkToShow = window.setInterval(function() {
     display("buyBasketTip")
     gameData.b2 = true
   }
+
+  if (gameData.timePrevHour != gameData.timeHour){
+    if(gameData.timeHour <=4 || gameData.timeHour >= 18)
+    {
+      gameData.temperature = randomNumInRange(30, 75)
+    }
+    else{
+      gameData.temperature = randomNumInRange(75, 105)
+    }
+  }
+
+  if (gameData.temperature <= 50){
+    update("log", "It's getting cold tonight, perhaps I should find a way to get warm")
+  }
+  gameData.timePrevHour = gameData.timeHour
+
   if (gameData.coconuts >= 75) {
     display("collectStone")
     display("stoneTip")
@@ -153,6 +184,14 @@ function updateAllVariables(savegame) {
   update("log", gameData.log)
 }
 
+function randomNumInRange(min, max){
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min
+
+}
+
+
 /*
 var saveGameLoop = window.setInterval(function() {
   localStorage.setItem('islandSave', JSON.stringify(gameData))
@@ -167,4 +206,5 @@ function loadGame() {
     gameData = savegame
     updateAllVariables(savegame)
   }
+
 }
